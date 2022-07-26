@@ -53,7 +53,7 @@ public class Main {
                 System.out.println("Yeah of course come on in have a seat!");
                 System.out.println();
                 System.out.println("-------------------------");
-                System.out.println("\t\tThe night of");
+                System.out.println("\tThe night of");
                 System.out.println("-------------------------");
                 System.out.println();
                 System.out.println("You pour a glass and hand the neighbor some water. (What's wrong / let him calm down)");
@@ -127,7 +127,7 @@ public class Main {
                         if (choiceS.equals("greetit") || choiceS.equals("fight")) {
                             // attacks
                         }
-                    } else if (choiceS.equals("Hide")) {
+                    } else {
                         System.out.print("You quickly run towards your room with the phone still ringing and door still banging.\n" +
                                 "You chose to hide under your bed.");
                     }
@@ -149,8 +149,14 @@ public class Main {
                         "What do you do? (Answer the phone / Open the door / Hide) ");
                 choice = userInput.nextLine();
                 String choiceS = choice.replaceAll("'", "").replaceAll(" ", "");
-                if (choiceS.equals("greetit") || choiceS.equals("fight")) {
-                    // attacks
+                if (choiceS.equals("greetit")) {
+                    System.out.println("'Hi! How's it goin'!'\n" +
+                            "The being winds up revealing its claws and slashes down on your head.");
+                } else if (choiceS.equals("fight")){
+                    // attack it
+                } else {
+                    System.out.print("You quickly run towards your room with the phone still ringing and door still banging.\n" +
+                            "You chose to hide under your bed.");
                 }
             }
 
