@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
+        Actions actions = new Actions();
+        JumpOutTheWindow jump = new JumpOutTheWindow();
         String choice = "y";
 
         for (int i = 0; i < 3; i++) {
@@ -90,7 +92,6 @@ public class Main {
         System.out.println("\t\tThe next day");
         System.out.println("---------------------------");
         System.out.println();
-        choice = "y";
 
         for (int i = 0; i < 3; i++) {
             System.out.print("You wake up shaken from a nightmare; sweat drenched all over your back.\n" +
@@ -112,10 +113,7 @@ public class Main {
                     choice = userInput.nextLine();
                     choiceS = choice.replaceAll("'", "").replaceAll(" ", "");
                     if (choiceS.equals("jumpoutthewindow")) {
-                        System.out.print("You chose to follow the voice on the phone and not open the door.\n" +
-                                "You open and jump out of your second story window.\n" +
-                                "'AAaaughh' you roll your ankle.\n" +
-                                "Hobbled but able to continue you get up and make your way through the night.");
+                        jump.jumpOutTheWindow();
                         break;
                     } else if (choiceS.equals("openthedoor")) {
                         System.out.print("You open the door. . .\n" +
@@ -124,8 +122,14 @@ public class Main {
                                 "(greet it / run / fight) ");
                         choice = userInput.nextLine();
                         choiceS = choice.replaceAll("'", "").replaceAll(" ", "");
-                        if (choiceS.equals("greetit") || choiceS.equals("fight")) {
-                            // attacks
+                        if (choiceS.equals("greetit")) {
+                            System.out.println("'Hi! How's it goin'!'\n" +
+                                    "The being winds up revealing its claws and slashes down on your head.");
+                            actions.getInstant();
+                            break;
+                        } else if (choiceS.equals("fight")){
+                            actions.getHit();
+                            actions.attack();
                         }
                     } else {
                         System.out.print("You quickly run towards your room with the phone still ringing and door still banging.\n" +
@@ -138,8 +142,14 @@ public class Main {
                             "(greet it / run / fight) ");
                     choice = userInput.nextLine();
                     choiceS = choice.replaceAll("'", "").replaceAll(" ", "");
-                    if (choiceS.equals("greetit") || choiceS.equals("fight")) {
-                        // attacks
+                    if (choiceS.equals("greetit")) {
+                        System.out.println("'Hi! How's it goin'!'\n" +
+                                "The being winds up revealing its claws and slashes down on your head.");
+                        actions.getInstant(); // insta kill
+                        break;
+                    } else if (choiceS.equals("fight")){
+                        actions.getHit(); // monster hits you
+                        actions.attack(); // you hit back as long as you don't die immediately
                     }
                 }
             } else if (choice.equals("n")) {
@@ -152,8 +162,11 @@ public class Main {
                 if (choiceS.equals("greetit")) {
                     System.out.println("'Hi! How's it goin'!'\n" +
                             "The being winds up revealing its claws and slashes down on your head.");
+                    actions.getInstant(); // insta kill
+                    break;
                 } else if (choiceS.equals("fight")){
-                    // attack it
+                    actions.getHit();
+                    actions.attack();
                 } else {
                     System.out.print("You quickly run towards your room with the phone still ringing and door still banging.\n" +
                             "You chose to hide under your bed.");
