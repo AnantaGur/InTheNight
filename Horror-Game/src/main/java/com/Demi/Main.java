@@ -1,16 +1,35 @@
 package com.Demi;
 
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JavaLayerException, FileNotFoundException, InterruptedException {
         Scanner userInput = new Scanner(System.in);
         Actions actions = new Actions();
         JumpOutTheWindow jump = new JumpOutTheWindow();
+
+        FileInputStream rainFile = new FileInputStream("rainfall.mp3");
+        FileInputStream quietFile = new FileInputStream("neighborknock.mp3");
+        FileInputStream loudFile = new FileInputStream("loudknock.mp3");
+        FileInputStream phoneFile = new FileInputStream("phonering.mp3");
+        FileInputStream droneFile = new FileInputStream("drone.mp3");
+        Player rainMP3 = new Player(rainFile);
+        Player quietKnockMP3 = new Player(quietFile);
+        Player loudKnockMP3 = new Player(loudFile);
+        Player phoneRingMP3 = new Player(phoneFile);
+        Player droneMP3 = new Player(droneFile);
+
         String choice = "y";
 
         for (int i = 0; i < 3; i++) {
+
             System.out.println("You wake up shaken from a nightmare; sweat drenched all over your back.");
             System.out.print("Would you like to get a drink of water? (Y/N) ");
             choice = userInput.nextLine().toLowerCase();
@@ -18,7 +37,9 @@ public class Main {
                 boolean drinkWater = true;
                 System.out.println("You get out of bed and pour yourself a drink of water.");
                 if (drinkWater) {
-                    System.out.print("You pour yourself a drink and hear a knock on the door. Will you open? (Y/N)");
+                    System.out.print("You pour yourself a drink and hear . . .\n");
+                    quietKnockMP3.play();
+                    System.out.println("A knock on the door. Will you open? (Y/N)");
                     choice = userInput.nextLine().toLowerCase();
                     if (choice.equals("y")) {
                         System.out.print("You open your door. \nYou neighbor appears in a panic. " +
@@ -96,14 +117,19 @@ public class Main {
         for (int i = 0; i < 3; i++) {
             System.out.print("You wake up shaken from a nightmare; sweat drenched all over your back.\n" +
                     "'What the hell!?' shaking off your nightmare you just had you go get yourself a drink of water.\n" +
-                    "'That felt too real' then . . . KNOCK... KNOCK... KNOCK... from your door\n" +
+                    "'That felt too real' then . . . ");
+            Thread.sleep(3000);
+            loudKnockMP3.play();
+            System.out.println( "KNOCK... KNOCK... KNOCK... from your door\n" +
                     "You fall back shaken unable to even get a whimper out.  Do you open the door? (Y/N)");
             choice = userInput.nextLine().toLowerCase();
             if (choice.equals("y")) {
                 System.out.print("You muster up enough courage to get up and face the door.\n" +
-                        "'It was just a nightmare', you attempt to convince yourself. KNOCK... KNOCK.. KNOCK.\n" +
-                        "As you muster up enough courage to open the door.\n" +
-                        "RING RING... RING RING... RING RING... Do you answer the phone or open the door?");
+                        "'It was just a nightmare', you attempt to convince yourself.\n");
+                System.out.println("As you muster up enough courage to open the door.\n");
+                Thread.sleep(3000);
+                phoneRingMP3.play();
+                System.out.println("RING RING... RING RING... RING RING... Do you answer the phone or open the door?");
                 choice = userInput.nextLine();
                 String choiceS = choice.replaceAll("'", "").replaceAll(" ", "");
                 if (choiceS.equals("answerthephone")) {
@@ -127,7 +153,7 @@ public class Main {
                                     "The being winds up revealing its claws and slashes down on your head.");
                             actions.getInstant();
                             break;
-                        } else if (choiceS.equals("fight")){
+                        } else if (choiceS.equals("fight")) {
                             actions.getHit();
                             actions.attack();
                         }
@@ -140,6 +166,7 @@ public class Main {
                             "Frozen with fear a tall lanky figures shadow towers over you.\n" +
                             "It makes a whispered whimper, it sounds like the being is in pain 'Aaaaggghhhhuuuuuuhhhhahhhh'\n" +
                             "(greet it / run / fight) ");
+                    droneMP3.play();
                     choice = userInput.nextLine();
                     choiceS = choice.replaceAll("'", "").replaceAll(" ", "");
                     if (choiceS.equals("greetit")) {
@@ -147,7 +174,7 @@ public class Main {
                                 "The being winds up revealing its claws and slashes down on your head.");
                         actions.getInstant(); // insta kill
                         break;
-                    } else if (choiceS.equals("fight")){
+                    } else if (choiceS.equals("fight")) {
                         actions.getHit(); // monster hits you
                         actions.attack(); // you hit back as long as you don't die immediately
                     }
@@ -164,7 +191,7 @@ public class Main {
                             "The being winds up revealing its claws and slashes down on your head.");
                     actions.getInstant(); // insta kill
                     break;
-                } else if (choiceS.equals("fight")){
+                } else if (choiceS.equals("fight")) {
                     actions.getHit();
                     actions.attack();
                 } else {

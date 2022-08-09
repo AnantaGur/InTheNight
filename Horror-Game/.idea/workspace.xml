@@ -29,8 +29,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
   </component>
-  <component name="RunManager" selected="Application.JumpOutTheWindow">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="JumpOutTheWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.Demi.JumpOutTheWindow" />
       <module name="Horror-Game" />
@@ -59,8 +60,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.JumpOutTheWindow" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.JumpOutTheWindow" />
       </list>
     </recent_temporary>
   </component>
